@@ -4,7 +4,7 @@ li {
 
 ul.autocomplete li {
   cursor: pointer;
-  &:hover {
+  &.considering {
     background-color: #7e69c6;
   }
 }
