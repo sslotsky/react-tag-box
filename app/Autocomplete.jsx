@@ -3,20 +3,23 @@ import React, { PropTypes, Component } from 'react'
 export default class extends Component {
   static propTypes = {
     input: PropTypes.string,
-    tags: PropTypes.arrayOf(PropTypes.string).isRequired
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    open: PropTypes.func.isRequired,
+    close: PropTypes.func.isRequired,
+    select: PropTypes.func.isRequired
   }
 
   componentWillReceiveProps(nextProps) {
-    const { tags, input, open, close } = nextProps;
+    const { tags, input, open, close } = nextProps
 
     if (!input || input === this.props.input) {
       return
     }
 
     if (tags.some(t => t.includes(input))) {
-      open();
+      open()
     } else {
-      close();
+      close()
     }
   }
 

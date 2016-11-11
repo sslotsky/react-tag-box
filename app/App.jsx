@@ -12,7 +12,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { tag, tags, selected, open } = this.state;
+    const { tag, tags, selected, open } = this.state
 
     const pills = selected.map(t => (
       <li key={t}>{t}</li>
@@ -68,7 +68,7 @@ export default class App extends Component {
           open={autocompleteOpen}
           close={autocompleteClose}
           select={select}
-        /> 
+        />
       </div>
     )
   }
