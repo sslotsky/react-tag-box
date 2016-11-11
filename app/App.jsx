@@ -19,24 +19,27 @@ export default class App extends Component {
   render() {
     const { tags, selected } = this.state
     const onSelect = tag => {
-      if (selected.map(t => t.value).includes(tag.value)) {
-        return
-      }
-
       const newTag = {
         label: tag.label,
         value: tag.value || tag.label
       }
 
+      if (selected.map(t => t.value).includes(newTag.value)) {
+        return
+      }
+
       this.setState({
-        tags: tags.filter(t => t.value !== newTag.value),
         selected: selected.push(newTag)
       })
     }
 
+    const unselected = tags.filter(t =>
+      !selected.map(s => s.value).includes(t.value)
+    )
+
     return (
       <TagBox
-        tags={tags.toJS()}
+        tags={unselected.toJS()}
         selected={selected.toJS()}
         onSelect={onSelect}
       />

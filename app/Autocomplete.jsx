@@ -20,6 +20,10 @@ export default class extends Component {
   componentWillReceiveProps(nextProps) {
     const { tags, input, open, close, consider } = nextProps
 
+    if (this.props.input && !input) {
+      consider(null)
+    }
+
     if (!input || input === this.props.input) {
       return
     }

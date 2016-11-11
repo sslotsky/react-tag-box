@@ -34,38 +34,29 @@ export default class TagBox extends Component {
     this.setState({ tag: '' })
   }
 
-  createTag() {
-    const { open, considering, tag } = this.state
-
-    if (!open && !tag) {
-      return
-    }
-
-    const value = open ? considering : { label: tag }
-    this.select(value)
-  }
-
   keyHandler() {
     return e => {
+      const { open, tag, considering } = this.state
+
       switch (e.which) {
         case 13:
           e.preventDefault()
-          this.createTag()
+          this.select({ label: tag })
           break
         case 40:
-          this.autocomplete.considerNext()
+          if (open) {
+            this.autocomplete.considerNext()
+          }
           break
         case 38:
-          this.autocomplete.considerPrevious()
+          if (open) {
+            this.autocomplete.considerPrevious()
+          }
           break
         case 9:
-          if (this.state.open) {
+          if (open) {
             e.preventDefault()
-            if (e.shiftKey) {
-              this.autocomplete.considerPrevious()
-            } else {
-              this.autocomplete.considerNext()
-            }
+            this.select(considering)
           }
           break
         default: break
@@ -101,7 +92,7 @@ export default class TagBox extends Component {
           value={tag}
           onChange={this.tagUpdater()}
           onKeyDown={this.keyHandler()}
-          onBlur={() => this.createTag()}
+          onBlur={() => this.select({ label: tag })}
         />
         <Autocomplete
           ref={node => { this.autocomplete = node }}
