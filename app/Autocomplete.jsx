@@ -37,30 +37,36 @@ export default class extends Component {
     }
   }
 
-  considerNext() {
-    const { tags, consider, considering, input } = this.props
+  matchingOptions() {
+    const { tags, input } = this.props
     const matches = tags.filter(t => t.label.includes(input))
     const values = matches.map(t => t.value)
+
+    return { matches, values }
+  }
+
+  considerNext() {
+    const { consider, considering } = this.props
+    const { matches, values } = this.matchingOptions()
     const nextIndex = Math.min(matches.length - 1, values.indexOf(considering.value) + 1)
     consider(matches[nextIndex])
   }
 
   considerPrevious() {
-    const { tags, consider, considering, input } = this.props
-    const matches = tags.filter(t => t.label.includes(input))
-    const values = matches.map(t => t.value)
+    const { consider, considering } = this.props
+    const { matches, values } = this.matchingOptions()
     const nextIndex = Math.max(0, values.indexOf(considering.value) - 1)
     consider(matches[nextIndex])
   }
 
   render() {
-    const { input, tags, select, considering, consider } = this.props
+    const { input, select, considering, consider } = this.props
 
     if (!input) {
       return false
     }
 
-    const matching = tags.filter(t => t.label.includes(input)).map(t => {
+    const matching = this.matchingOptions().matches.map(t => {
       const className = classNames({
         considering: considering === t
       })
