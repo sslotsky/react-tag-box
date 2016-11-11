@@ -35,6 +35,16 @@ export default class TagBox extends Component {
     this.setState({ tag: '' })
   }
 
+  blurTag() {
+    const { tag, open, considering } = this.state
+
+    if (open) {
+      this.select(considering)
+    } else if (tag) {
+      this.select({ label: tag })
+    }
+  }
+
   createTag() {
     const { tag } = this.state
     if (tag) {
@@ -90,20 +100,20 @@ export default class TagBox extends Component {
     const pills = selected.map(t => (
       <li key={t.value}>
         {t.label}
-        <button onClick={() => removeTag(t)}>x</button>
+        <button className="remove" onClick={() => removeTag(t)}>x</button>
       </li>
     ))
 
     return (
       <div>
-        <ul>
+        <ul className="pills">
           {pills}
         </ul>
         <input
           value={tag}
           onChange={this.tagUpdater()}
           onKeyDown={this.keyHandler()}
-          onBlur={() => this.createTag()}
+          onBlur={() => this.blurTag()}
         />
         <Autocomplete
           ref={node => { this.autocomplete = node }}
