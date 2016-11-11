@@ -35,7 +35,7 @@ export default class extends Component {
     ))
 
     return !!matching.length && (
-      <ul>
+      <ul className="autocomplete">
         {matching}
       </ul>
     )

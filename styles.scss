@@ -1,0 +1,10 @@
+li {
+  list-style: none;
+}
+
+ul.autocomplete li {
+  cursor: pointer;
+  &:hover {
+    background-color: #7e69c6;
+  }
+}

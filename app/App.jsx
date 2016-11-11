@@ -1,6 +1,7 @@
 import { Set } from 'immutable'
 import React, { Component } from 'react'
 import Autocomplete from './Autocomplete'
+import '../styles.scss'
 
 
 export default class App extends Component {
