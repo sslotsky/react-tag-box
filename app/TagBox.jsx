@@ -10,7 +10,8 @@ export default class TagBox extends Component {
   static propTypes = {
     tags: PropTypes.arrayOf(Tag),
     selected: PropTypes.arrayOf(Tag),
-    onSelect: PropTypes.func.isRequired
+    onSelect: PropTypes.func.isRequired,
+    removeTag: PropTypes.func.isRequired
   }
 
   state = {
@@ -34,14 +35,21 @@ export default class TagBox extends Component {
     this.setState({ tag: '' })
   }
 
+  createTag() {
+    const { tag } = this.state
+    if (tag) {
+      this.select({ label: tag })
+    }
+  }
+
   keyHandler() {
     return e => {
-      const { open, tag, considering } = this.state
+      const { open, considering } = this.state
 
       switch (e.which) {
         case 13:
           e.preventDefault()
-          this.select({ label: tag })
+          this.createTag()
           break
         case 40:
           if (open) {
@@ -78,9 +86,12 @@ export default class TagBox extends Component {
     }
 
     const { tag, considering } = this.state
-    const { tags, selected } = this.props
+    const { tags, selected, removeTag } = this.props
     const pills = selected.map(t => (
-      <li key={t.value}>{t.label}</li>
+      <li key={t.value}>
+        {t.label}
+        <button onClick={() => removeTag(t)}>x</button>
+      </li>
     ))
 
     return (
@@ -92,7 +103,7 @@ export default class TagBox extends Component {
           value={tag}
           onChange={this.tagUpdater()}
           onKeyDown={this.keyHandler()}
-          onBlur={() => this.select({ label: tag })}
+          onBlur={() => this.createTag()}
         />
         <Autocomplete
           ref={node => { this.autocomplete = node }}

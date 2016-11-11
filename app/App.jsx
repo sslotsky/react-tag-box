@@ -33,6 +33,12 @@ export default class App extends Component {
       })
     }
 
+    const remove = tag => {
+      this.setState({
+        selected: selected.filter(t => t.value !== tag.value)
+      })
+    }
+
     const unselected = tags.filter(t =>
       !selected.map(s => s.value).includes(t.value)
     )
@@ -42,6 +48,7 @@ export default class App extends Component {
         tags={unselected.toJS()}
         selected={selected.toJS()}
         onSelect={onSelect}
+        removeTag={remove}
       />
     )
   }
