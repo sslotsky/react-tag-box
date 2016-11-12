@@ -1,5 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import Autocomplete from './Autocomplete'
+import drive from './driver'
 
 const Tag = PropTypes.shape({
   value: PropTypes.any.isRequired,
@@ -53,30 +54,16 @@ export default class TagBox extends Component {
 
   keyHandler() {
     return e => {
-      const { considering } = this.state
+      const action = drive(e, {
+        create: () => this.createTag(),
+        next: () => this.autocomplete.considerNext(),
+        prev: () => this.autocomplete.considerPrevious(),
+        select: (tag) => this.select(tag),
+        considering: this.state.considering
+      })
 
-      switch (e.which) {
-        case 13:
-          e.preventDefault()
-          this.createTag()
-          break
-        case 40:
-          if (considering) {
-            this.autocomplete.considerNext()
-          }
-          break
-        case 38:
-          if (considering) {
-            this.autocomplete.considerPrevious()
-          }
-          break
-        case 9:
-          if (considering) {
-            e.preventDefault()
-            this.select(considering)
-          }
-          break
-        default: break
+      if (action) {
+        action()
       }
     }
   }
