@@ -16,8 +16,7 @@ export default class TagBox extends Component {
 
   state = {
     tag: '',
-    considering: null,
-    open: false
+    considering: null
   }
 
   tagUpdater() {
@@ -36,9 +35,9 @@ export default class TagBox extends Component {
   }
 
   blurTag() {
-    const { tag, open, considering } = this.state
+    const { tag, considering } = this.state
 
-    if (open) {
+    if (considering) {
       this.select(considering)
     } else if (tag) {
       this.select({ label: tag })
@@ -54,7 +53,7 @@ export default class TagBox extends Component {
 
   keyHandler() {
     return e => {
-      const { open, considering } = this.state
+      const { considering } = this.state
 
       switch (e.which) {
         case 13:
@@ -62,17 +61,17 @@ export default class TagBox extends Component {
           this.createTag()
           break
         case 40:
-          if (open) {
+          if (considering) {
             this.autocomplete.considerNext()
           }
           break
         case 38:
-          if (open) {
+          if (considering) {
             this.autocomplete.considerPrevious()
           }
           break
         case 9:
-          if (open) {
+          if (considering) {
             e.preventDefault()
             this.select(considering)
           }
@@ -83,14 +82,6 @@ export default class TagBox extends Component {
   }
 
   render() {
-    const autocompleteOpen = () => {
-      this.setState({ open: true })
-    }
-
-    const autocompleteClose = () => {
-      this.setState({ open: false })
-    }
-
     const consider = (option) => {
       this.setState({ considering: option })
     }
@@ -105,7 +96,7 @@ export default class TagBox extends Component {
     ))
 
     return (
-      <div>
+      <div className="tag-box">
         <ul className="pills">
           {pills}
         </ul>
@@ -119,8 +110,6 @@ export default class TagBox extends Component {
           ref={node => { this.autocomplete = node }}
           input={tag}
           tags={tags}
-          open={autocompleteOpen}
-          close={autocompleteClose}
           select={() => this.select()}
           considering={considering}
           consider={consider}

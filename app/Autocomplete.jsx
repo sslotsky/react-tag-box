@@ -10,15 +10,13 @@ export default class extends Component {
   static propTypes = {
     input: PropTypes.string,
     tags: PropTypes.arrayOf(Tag).isRequired,
-    open: PropTypes.func.isRequired,
-    close: PropTypes.func.isRequired,
     select: PropTypes.func.isRequired,
     considering: Tag,
     consider: PropTypes.func.isRequired
   }
 
   componentWillReceiveProps(nextProps) {
-    const { tags, input, open, close, consider } = nextProps
+    const { tags, input, consider } = nextProps
 
     if (this.props.input && !input) {
       consider(null)
@@ -30,10 +28,7 @@ export default class extends Component {
 
     const matches = tags.filter(t => t.label.includes(input))
     if (matches.length) {
-      open()
       consider(matches[0])
-    } else {
-      close()
     }
   }
 
