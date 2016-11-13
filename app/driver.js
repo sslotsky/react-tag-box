@@ -21,26 +21,32 @@ export default function drive(event, tagManager) {
     }
   }
 
-  const eventMap = {
-    [ENTER]: () => {
+  const create = () => {
+    event.preventDefault()
+    tagManager.create()
+  }
+
+  const select = () => {
+    if (tagManager.considering) {
       event.preventDefault()
-      tagManager.create()
-    },
+      tagManager.select(tagManager.considering)
+    }
+  }
+
+  const clear = () => {
+    if (tagManager.considering) {
+      tagManager.clear()
+    }
+  }
+
+  const eventMap = {
+    [ENTER]: create,
     [RIGHT]: next,
     [DOWN]: next,
     [UP]: prev,
     [LEFT]: prev,
-    [TAB]: () => {
-      if (tagManager.considering) {
-        event.preventDefault()
-        tagManager.select(tagManager.considering)
-      }
-    },
-    [ESC]: () => {
-      if (tagManager.considering) {
-        tagManager.clear()
-      }
-    }
+    [TAB]: select,
+    [ESC]: clear
   }
 
   return eventMap[event.which]
