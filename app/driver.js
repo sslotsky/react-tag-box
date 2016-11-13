@@ -2,6 +2,7 @@ const ENTER = 13
 const DOWN = 40
 const UP = 38
 const TAB = 9
+const ESC = 27
 
 export default function drive(event, tagManager) {
   const eventMap = {
@@ -23,6 +24,11 @@ export default function drive(event, tagManager) {
       if (tagManager.considering) {
         event.preventDefault()
         tagManager.select(tagManager.considering)
+      }
+    },
+    [ESC]: () => {
+      if (tagManager.considering) {
+        tagManager.clear()
       }
     }
   }

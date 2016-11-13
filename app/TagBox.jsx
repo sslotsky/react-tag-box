@@ -59,6 +59,7 @@ export default class TagBox extends Component {
         next: () => this.autocomplete.considerNext(),
         prev: () => this.autocomplete.considerPrevious(),
         select: (tag) => this.select(tag),
+        clear: () => this.setState({ tag: '', considering: null }),
         considering: this.state.considering
       })
 

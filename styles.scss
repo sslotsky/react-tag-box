@@ -1,12 +1,21 @@
+ul {
+  padding-left: 0px;
+}
+
 li {
   list-style: none;
 }
 
 ul.pills li {
-  display: inline;
+  display: inline-block;
   margin-right: 1rem;
+  margin-top: 1rem;
   .remove {
     margin-left: 0.5rem;
+  }
+
+  button {
+    padding: 0.25rem 0.75rem;
   }
 }
 
@@ -15,4 +24,11 @@ ul.autocomplete li {
   &.considering {
     background-color: #7e69c6;
   }
+}
+
+.tag-box input {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  width: 100%;
 }
