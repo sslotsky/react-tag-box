@@ -1,6 +1,6 @@
 {
   "name": "react-webpack-client",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A bare-bones React app built with Webpack",
   "main": "index.js",
   "scripts": {
