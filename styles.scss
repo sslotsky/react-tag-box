@@ -6,29 +6,56 @@ li {
   list-style: none;
 }
 
-ul.pills li {
-  display: inline-block;
-  margin-right: 1rem;
-  margin-top: 1rem;
-  .remove {
-    margin-left: 0.5rem;
-  }
+ul.pills {
+  padding-left: 1rem;
 
-  button {
-    padding: 0.25rem 0.75rem;
+  li {
+    display: inline-block;
+    margin-right: 1rem;
+    margin-top: 1rem;
+    background-color: gold;
+    border-radius: 0.25rem;
+
+    .remove {
+      margin-left: 0.5rem;
+    }
+
+    .pill-text {
+      margin-left: 0.5rem;
+    }
+
+    button {
+      padding: 0.25rem 0.75rem;
+    }
   }
 }
 
-ul.autocomplete li {
-  cursor: pointer;
-  &.considering {
-    background-color: #7e69c6;
+ul.autocomplete {
+  border-bottom: 1px solid #7e69c6;
+  padding: 1rem;
+
+  li {
+    cursor: pointer;
+    &.considering {
+      background-color: #7e69c6;
+    }
   }
 }
 
-.tag-box input {
-  border: none;
-  outline: none;
-  background-color: transparent;
-  width: 100%;
+.tag-box {
+  border-top: 1px solid #7e69c6;
+  border-left: 1px solid #7e69c6;
+  border-right: 1px solid #7e69c6;
+  border-radius: 0.25rem 0.25rem 0 0;
+
+  input {
+    padding: 1rem;
+    border-bottom: 1px solid #7e69c6;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+  }
 }

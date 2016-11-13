@@ -78,7 +78,9 @@ export default class TagBox extends Component {
     const { tags, selected, removeTag } = this.props
     const pills = selected.map(t => (
       <li key={t.value}>
-        {t.label}
+        <span className="pill-text">
+          {t.label}
+        </span>
         <button className="remove" onClick={() => removeTag(t)}>x</button>
       </li>
     ))

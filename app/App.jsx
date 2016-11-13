@@ -44,12 +44,14 @@ export default class App extends Component {
     )
 
     return (
-      <TagBox
-        tags={unselected.toJS()}
-        selected={selected.toJS()}
-        onSelect={onSelect}
-        removeTag={remove}
-      />
+      <div style={{ width: '50%' }}>
+        <TagBox
+          tags={unselected.toJS()}
+          selected={selected.toJS()}
+          onSelect={onSelect}
+          removeTag={remove}
+        />
+      </div>
     )
   }
 }
