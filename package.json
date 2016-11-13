@@ -1,7 +1,7 @@
 {
-  "name": "react-webpack-client",
+  "name": "react-tag-box",
   "version": "0.1.0",
-  "description": "A bare-bones React app built with Webpack",
+  "description": "A tagging component in React. Select, create, and delete tags.",
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --progress --colors -w",

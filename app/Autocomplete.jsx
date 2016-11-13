@@ -73,7 +73,9 @@ export default class extends Component {
           onClick={() => select(t)}
           onMouseOver={() => consider(t)}
         >
-          {t.label}
+          <span className="option-text">
+            {t.label}
+          </span>
         </li>
       )
     })

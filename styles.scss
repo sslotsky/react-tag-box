@@ -36,8 +36,13 @@ ul.autocomplete {
 
   li {
     cursor: pointer;
+
     &.considering {
       background-color: #7e69c6;
+    }
+
+    .option-text {
+      padding-left: 0.5rem;
     }
   }
 }
