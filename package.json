@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --progress --colors -w",
     "lint": "eslint ./src/** --ext=js,jsx",
-    "compile": "babel -d lib/ src/",
+    "compile": "babel -d ./lib/ ./src/",
     "test": "npm run lint",
     "build-example": "webpack ./src/index.js"
   },
@@ -29,6 +29,7 @@
     "webpack": "^1.13.1"
   },
   "devDependencies": {
+    "babel-cli": "^6.18.0",
     "babel-eslint": "^6.1.2",
     "babel-plugin-module-resolver": "^2.2.0",
     "babel-register": "^6.11.6",
