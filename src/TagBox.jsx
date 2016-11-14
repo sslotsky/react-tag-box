@@ -1,6 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 import Autocomplete from './Autocomplete'
 import drive from './driver'
+import TAG_REJECTED from './constants'
 
 const Tag = PropTypes.shape({
   value: PropTypes.any.isRequired,
@@ -36,8 +37,10 @@ export default class TagBox extends Component {
       return
     }
 
-    this.props.onSelect(tag)
-    this.setState({ tag: '' })
+    const status = this.props.onSelect(tag)
+    if (status !== TAG_REJECTED) {
+      this.setState({ tag: '' })
+    }
   }
 
   blurTag() {
