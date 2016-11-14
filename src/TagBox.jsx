@@ -55,6 +55,8 @@ export default class TagBox extends Component {
   keyHandler() {
     return e => {
       const action = drive(e, {
+        tag: this.state.tag,
+        tags: this.props.tags,
         create: () => this.createTag(),
         next: () => this.autocomplete.considerNext(),
         prev: () => this.autocomplete.considerPrevious(),

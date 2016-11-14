@@ -23,7 +23,13 @@ export default function drive(event, tagManager) {
 
   const create = () => {
     event.preventDefault()
-    tagManager.create()
+    const { tag, tags, create: createTag, select } = tagManager
+    const existingTag = tags.find(t => t.label === tag)
+    if (existingTag) {
+      select(existingTag)
+    } else {
+      createTag()
+    }
   }
 
   const select = () => {
