@@ -93,11 +93,12 @@ export default class TagBox extends Component {
     ))
 
     return (
-      <div className="tag-box">
+      <div className="tag-box" onClick={() => this.input.focus()}>
         <ul className="pills">
           {pills}
         </ul>
         <input
+          ref={node => { this.input = node }}
           value={tag}
           onChange={this.tagUpdater()}
           onKeyDown={this.keyHandler()}
