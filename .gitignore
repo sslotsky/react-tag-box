@@ -2,3 +2,4 @@
 *.swo
 *.swn
 node_modules/
+*.log

@@ -7,7 +7,8 @@
     "start": "webpack-dev-server --progress --colors -w",
     "lint": "eslint ./src/** --ext=js,jsx",
     "compile": "babel -d lib/ src/",
-    "test": "npm run lint"
+    "test": "npm run lint",
+    "build-example": "webpack ./src/index.js"
   },
   "author": "Sam Slotsky",
   "license": "MIT",
