@@ -1,7 +1,7 @@
 import { List } from 'immutable'
 import React, { Component } from 'react'
-import TagBox from './TagBox'
-import '../styles.scss'
+import { TagBox } from '../src'
+import './styles.scss'
 
 const sampleTags = List(
   ['foo', 'bar', 'baz', 'blitz', 'quux', 'barf', 'balderdash'].map(t => ({

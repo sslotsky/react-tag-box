@@ -2,10 +2,11 @@
   "name": "react-tag-box",
   "version": "0.1.0",
   "description": "A tagging component in React. Select, create, and delete tags.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "start": "webpack-dev-server --progress --colors -w",
-    "lint": "eslint ./app/** --ext=js,jsx",
+    "lint": "eslint ./src/** --ext=js,jsx",
+    "compile": "babel -d lib/ src/",
     "test": "npm run lint"
   },
   "author": "Sam Slotsky",

@@ -3,7 +3,7 @@ var webpack = require('webpack')
 var BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 
 module.exports = {
-  entry: './index.js',
+  entry: './example/index.js',
   output: { path: __dirname, filename: 'bundle.js' },
   devtool: "eval-source-map",
   resolve: {
