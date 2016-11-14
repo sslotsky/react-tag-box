@@ -11,8 +11,10 @@ export default class extends Component {
     input: PropTypes.string,
     tags: PropTypes.arrayOf(Tag).isRequired,
     select: PropTypes.func.isRequired,
+    create: PropTypes.func.isRequired,
     considering: Tag,
-    consider: PropTypes.func.isRequired
+    consider: PropTypes.func.isRequired,
+    renderNewOption: PropTypes.func.isRequired
   }
 
   componentWillReceiveProps(nextProps) {
@@ -29,6 +31,8 @@ export default class extends Component {
     const matches = tags.filter(t => t.label.includes(input))
     if (matches.length) {
       consider(matches[0])
+    } else {
+      consider(null)
     }
   }
 
@@ -43,6 +47,11 @@ export default class extends Component {
   considerNext() {
     const { consider, considering } = this.props
     const { matches, values } = this.matchingOptions()
+
+    if (!matches.length) {
+      return
+    }
+
     const nextIndex = Math.min(matches.length - 1, values.indexOf(considering.value) + 1)
     consider(matches[nextIndex])
   }
@@ -50,18 +59,37 @@ export default class extends Component {
   considerPrevious() {
     const { consider, considering } = this.props
     const { matches, values } = this.matchingOptions()
+
+    if (!matches.length) {
+      return
+    }
+
     const nextIndex = Math.max(0, values.indexOf(considering.value) - 1)
     consider(matches[nextIndex])
   }
 
   render() {
-    const { input, select, considering, consider } = this.props
+    const { input, select, create, considering, consider, renderNewOption } = this.props
 
     if (!input) {
       return false
     }
 
-    const matching = this.matchingOptions().matches.map(t => {
+    const { matches } = this.matchingOptions()
+    const exactMatch = matches.find(t => t.label === input)
+    const addNewOption = !exactMatch && (
+      <li
+        className={classNames('add-new', { considering: !considering })}
+        onClick={create}
+        onMouseOver={() => consider(null)}
+      >
+        <span className="option-text">
+          {renderNewOption(input)}
+        </span>
+      </li>
+    )
+
+    const matching = matches.map(t => {
       const className = classNames({
         considering: considering === t
       })
@@ -80,8 +108,9 @@ export default class extends Component {
       )
     })
 
-    return !!matching.length && (
+    return (
       <ul className="autocomplete">
+        {addNewOption}
         {matching}
       </ul>
     )

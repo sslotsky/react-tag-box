@@ -12,7 +12,12 @@ export default class TagBox extends Component {
     tags: PropTypes.arrayOf(Tag),
     selected: PropTypes.arrayOf(Tag),
     onSelect: PropTypes.func.isRequired,
-    removeTag: PropTypes.func.isRequired
+    removeTag: PropTypes.func.isRequired,
+    renderNewOption: PropTypes.func
+  }
+
+  static defaultProps = {
+    renderNewOption: input => `Add ${input}...`
   }
 
   state = {
@@ -99,10 +104,12 @@ export default class TagBox extends Component {
           onBlur={() => this.blurTag()}
         />
         <Autocomplete
+          {...this.props}
           ref={node => { this.autocomplete = node }}
           input={tag}
           tags={tags}
-          select={() => this.select()}
+          select={(t) => this.select(t)}
+          create={() => this.createTag()}
           considering={considering}
           consider={consider}
         />
