@@ -84,17 +84,17 @@ export default class TagBox extends Component {
     const { tag, considering } = this.state
     const { tags, selected, removeTag } = this.props
     const pills = selected.map(t => (
-      <li key={t.value}>
-        <span className="pill-text">
+      <li className="tag-box-pill" key={t.value}>
+        <span className="tag-box-pill-text">
           {t.label}
         </span>
-        <button className="remove" onClick={() => removeTag(t)}>x</button>
+        <button type="button" className="remove" onClick={() => removeTag(t)}>&times;</button>
       </li>
     ))
 
     return (
       <div className="tag-box" onClick={() => this.input.focus()}>
-        <ul className="pills">
+        <ul className="tag-box-pills">
           {pills}
         </ul>
         <input
