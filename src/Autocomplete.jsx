@@ -1,18 +1,14 @@
 import React, { PropTypes, Component } from 'react'
 import classNames from 'classnames'
-
-const Tag = PropTypes.shape({
-  value: PropTypes.any.isRequired,
-  label: PropTypes.string.isRequired
-})
+import TagProp from './utils'
 
 export default class extends Component {
   static propTypes = {
     input: PropTypes.string,
-    tags: PropTypes.arrayOf(Tag).isRequired,
+    tags: PropTypes.arrayOf(TagProp).isRequired,
     select: PropTypes.func.isRequired,
     create: PropTypes.func.isRequired,
-    considering: Tag,
+    considering: TagProp,
     consider: PropTypes.func.isRequired,
     renderNewOption: PropTypes.func.isRequired
   }

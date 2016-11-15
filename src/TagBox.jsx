@@ -2,16 +2,13 @@ import React, { PropTypes, Component } from 'react'
 import Autocomplete from './Autocomplete'
 import drive from './driver'
 import TAG_REJECTED from './constants'
-
-const Tag = PropTypes.shape({
-  value: PropTypes.any.isRequired,
-  label: PropTypes.string.isRequired
-})
+import TagProp from './utils'
+import Tag from './Tag'
 
 export default class TagBox extends Component {
   static propTypes = {
-    tags: PropTypes.arrayOf(Tag),
-    selected: PropTypes.arrayOf(Tag),
+    tags: PropTypes.arrayOf(TagProp),
+    selected: PropTypes.arrayOf(TagProp),
     onSelect: PropTypes.func.isRequired,
     removeTag: PropTypes.func.isRequired,
     renderNewOption: PropTypes.func
@@ -87,12 +84,7 @@ export default class TagBox extends Component {
     const { tag, considering } = this.state
     const { tags, selected, removeTag } = this.props
     const pills = selected.map(t => (
-      <li className="tag-box-pill" key={t.value}>
-        <span className="tag-box-pill-text">
-          {t.label}
-        </span>
-        <button type="button" className="remove" onClick={() => removeTag(t)}>&times;</button>
-      </li>
+      <Tag tag={t} key={t.value} removeTag={removeTag} />
     ))
 
     return (
