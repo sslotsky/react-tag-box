@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/sslotsky/react-tag-box.svg?branch=master)](https://travis-ci.org/sslotsky/react-tag-box)
+
 # react-tag-box
 
 A React component for creating, selecting, and removing tags. This library focuses entirely on tagging rather than attempting to be a generic autocomplete library, because
