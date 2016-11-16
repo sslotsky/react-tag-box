@@ -43,6 +43,8 @@ export default class App extends Component {
       !selected.map(s => s.value).includes(t.value)
     )
 
+    const placeholder = selected.count() === 0 ? 'Add Tags' : ''
+
     return (
       <div style={{ width: '50%' }}>
         <TagBox
@@ -50,6 +52,7 @@ export default class App extends Component {
           selected={selected.toJS()}
           onSelect={onSelect}
           removeTag={remove}
+          placeholder={placeholder}
         />
       </div>
     )

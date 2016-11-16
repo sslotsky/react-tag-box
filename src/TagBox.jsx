@@ -11,11 +11,13 @@ export default class TagBox extends Component {
     selected: PropTypes.arrayOf(TagProp),
     onSelect: PropTypes.func.isRequired,
     removeTag: PropTypes.func.isRequired,
-    renderNewOption: PropTypes.func
+    renderNewOption: PropTypes.func,
+    placeholder: PropTypes.string
   }
 
   static defaultProps = {
-    renderNewOption: input => `Add ${input}...`
+    renderNewOption: input => `Add ${input}...`,
+    placeHolder: ''
   }
 
   state = {
@@ -82,7 +84,7 @@ export default class TagBox extends Component {
     }
 
     const { tag, considering } = this.state
-    const { tags, selected, removeTag } = this.props
+    const { tags, selected, removeTag, placeholder } = this.props
     const pills = selected.map(t => (
       <Tag tag={t} key={t.value} removeTag={removeTag} />
     ))
@@ -98,6 +100,7 @@ export default class TagBox extends Component {
           onChange={this.tagUpdater()}
           onKeyDown={this.keyHandler()}
           onBlur={() => this.blurTag()}
+          placeholder={placeholder}
         />
         <Autocomplete
           {...this.props}
