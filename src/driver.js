@@ -42,9 +42,8 @@ export default function drive(event, tagManager) {
   }
 
   const clear = () => {
-    if (tagManager.considering) {
-      tagManager.clear()
-    }
+    event.preventDefault()
+    tagManager.clear()
   }
 
   const eventMap = {
