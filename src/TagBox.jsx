@@ -12,7 +12,8 @@ export default class TagBox extends Component {
     onSelect: PropTypes.func.isRequired,
     removeTag: PropTypes.func.isRequired,
     renderNewOption: PropTypes.func,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    backspaceDelete: PropTypes.bool
   }
 
   static defaultProps = {
@@ -61,9 +62,13 @@ export default class TagBox extends Component {
 
   keyHandler() {
     return e => {
+      const { tags, selected, removeTag, backspaceDelete } = this.props
       const action = drive(e, {
         tag: this.state.tag,
-        tags: this.props.tags,
+        tags,
+        selected,
+        backspaceDelete,
+        remove: removeTag,
         create: () => this.createTag(),
         next: () => this.autocomplete.considerNext(),
         prev: () => this.autocomplete.considerPrevious(),

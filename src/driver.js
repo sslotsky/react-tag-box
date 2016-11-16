@@ -5,6 +5,7 @@ const RIGHT = 39
 const DOWN = 40
 const TAB = 9
 const ESC = 27
+const BKSPC = 8
 
 export default function drive(event, tagManager) {
   const next = () => {
@@ -53,6 +54,17 @@ export default function drive(event, tagManager) {
     tagManager.clear()
   }
 
+  const deleteLast = () => {
+    const { selected, tag, backspaceDelete, remove } = tagManager
+
+    if (tag || !backspaceDelete) {
+      return
+    }
+
+    event.preventDefault()
+    remove(selected.reverse()[0])
+  }
+
   const eventMap = {
     [ENTER]: create,
     [RIGHT]: next,
@@ -60,7 +72,8 @@ export default function drive(event, tagManager) {
     [UP]: prev,
     [LEFT]: prev,
     [TAB]: select,
-    [ESC]: clear
+    [ESC]: clear,
+    [BKSPC]: deleteLast
   }
 
   return eventMap[event.which]

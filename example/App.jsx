@@ -53,6 +53,7 @@ export default class App extends Component {
           onSelect={onSelect}
           removeTag={remove}
           placeholder={placeholder}
+          backspaceDelete={true}
         />
       </div>
     )
