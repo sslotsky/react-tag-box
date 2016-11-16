@@ -1,6 +1,6 @@
 {
   "name": "react-tag-box",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "A tagging component in React. Select, create, and delete tags.",
   "main": "lib/index.js",
   "scripts": {
