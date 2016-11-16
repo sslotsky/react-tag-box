@@ -35,9 +35,16 @@ export default function drive(event, tagManager) {
   }
 
   const select = () => {
-    if (tagManager.considering) {
+    const { considering, select: selectTag, tag, create: createTag } = tagManager
+
+    if (tag) {
       event.preventDefault()
-      tagManager.select(tagManager.considering)
+
+      if (considering) {
+        selectTag(considering)
+      } else {
+        createTag()
+      }
     }
   }
 
