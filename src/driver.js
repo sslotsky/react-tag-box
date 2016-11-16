@@ -8,10 +8,8 @@ const ESC = 27
 
 export default function drive(event, tagManager) {
   const next = () => {
-    if (tagManager.considering) {
-      event.preventDefault()
-      tagManager.next()
-    }
+    event.preventDefault()
+    tagManager.next()
   }
 
   const prev = () => {
@@ -23,12 +21,16 @@ export default function drive(event, tagManager) {
 
   const create = () => {
     event.preventDefault()
-    const { tag, tags, create: createTag, select } = tagManager
-    const existingTag = tags.find(t => t.label === tag)
-    if (existingTag) {
-      select(existingTag)
+    const { tag, tags, create: createTag, select, considering } = tagManager
+    if (considering) {
+      select(considering)
     } else {
-      createTag()
+      const existingTag = tags.find(t => t.label === tag)
+      if (existingTag) {
+        select(existingTag)
+      } else {
+        createTag()
+      }
     }
   }
 

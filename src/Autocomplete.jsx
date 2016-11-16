@@ -48,8 +48,12 @@ export default class extends Component {
       return
     }
 
-    const nextIndex = Math.min(matches.length - 1, values.indexOf(considering.value) + 1)
-    consider(matches[nextIndex])
+    if (!considering) {
+      consider(matches[0])
+    } else {
+      const nextIndex = Math.min(matches.length - 1, values.indexOf(considering.value) + 1)
+      consider(matches[nextIndex])
+    }
   }
 
   considerPrevious() {
@@ -60,8 +64,12 @@ export default class extends Component {
       return
     }
 
-    const nextIndex = Math.max(0, values.indexOf(considering.value) - 1)
-    consider(matches[nextIndex])
+    const currentIndex = values.indexOf(considering.value)
+    if (currentIndex === 0) {
+      consider(null)
+    } else {
+      consider(matches[currentIndex - 1])
+    }
   }
 
   render() {
