@@ -11,6 +11,15 @@
     "test": "npm run lint && npm run spec",
     "build-example": "webpack ./src/index.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sslotsky/react-tag-box.git"
+  },
+  "keywords": [
+    "react",
+    "tags",
+    "tagging
+  ],
   "author": "Sam Slotsky",
   "license": "MIT",
   "dependencies": {
