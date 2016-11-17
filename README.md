@@ -1,3 +1,4 @@
+[![npm version](https://badge.fury.io/js/react-tag-box.svg)](https://badge.fury.io/js/react-tag-box)
 [![Build Status](https://travis-ci.org/sslotsky/react-tag-box.svg?branch=master)](https://travis-ci.org/sslotsky/react-tag-box)
 
 # react-tag-box
