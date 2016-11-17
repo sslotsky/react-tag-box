@@ -1,6 +1,7 @@
 [![npm version](https://badge.fury.io/js/react-tag-box.svg)](https://badge.fury.io/js/react-tag-box)
 [![npm](https://img.shields.io/npm/dm/react-tag-box.svg)](https://www.npmjs.com/package/react-tag-box)
 [![Build Status](https://travis-ci.org/sslotsky/react-tag-box.svg?branch=master)](https://travis-ci.org/sslotsky/react-tag-box)
+[![npm](https://img.shields.io/npm/l/express.svg)](https://github.com/sslotsky/react-tag-box)
 
 # react-tag-box
 
