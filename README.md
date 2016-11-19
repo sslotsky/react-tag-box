@@ -17,12 +17,16 @@ Check out our demo on [gh-pages](https://sslotsky.github.io/react-tag-box/).
 
 `react-tag-box` manages `Tag` objects in the form of `{ label: String, value: Any }`. Users provide the folliwng properties:
 
-Property Name | Type | Description
+Property Name | Type | Required | Description
 ---|:---:|:---
-tags | `Array<Tag>` | The List of all tags
-selected | `Array<Tag>` | The list of currently selected tags
-onSelect | `function(tag)` | Function to be executed when a tag is selected or submitted
-removeTag | `function(tag)` | Function called when the `remove` button is clicked on a tag
+tags | `Array<Tag>` | true | The List of all tags
+selected | `Array<Tag>` | true | The list of currently selected tags
+onSelect | `function(tag)` | true | Function to be executed when a tag is selected or submitted
+removeTag | `function(tag)` | true | Function called when the `remove` button is clicked on a tag
+renderNewOption | `function(text)` | false | Function for overriding the default `Add ${input}` prompt 
+renderTag | `function(tag, remove)` | false | Function to override default tag rendering
+placeholder | `string` | false | Override default placeholder text
+backspaceDelete | `bool` | false | Whether or not the backspace key should delete the last tag. `false` by default 
 
 ### Example
 

@@ -12,6 +12,7 @@ export default class TagBox extends Component {
     onSelect: PropTypes.func.isRequired,
     removeTag: PropTypes.func.isRequired,
     renderNewOption: PropTypes.func,
+    renderTag: PropTypes.func,
     placeholder: PropTypes.string,
     backspaceDelete: PropTypes.bool
   }
@@ -89,9 +90,9 @@ export default class TagBox extends Component {
     }
 
     const { tag, considering } = this.state
-    const { tags, selected, removeTag, placeholder } = this.props
+    const { tags, selected, removeTag, placeholder, renderTag } = this.props
     const pills = selected.map(t => (
-      <Tag tag={t} key={t.value} removeTag={removeTag} />
+      <Tag tag={t} key={t.value} removeTag={removeTag} render={renderTag} />
     ))
 
     return (

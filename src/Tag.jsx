@@ -1,19 +1,19 @@
 import React, { PropTypes } from 'react'
 import TagProp from './utils'
 
-export default function Tag({ tag, removeTag }) {
-  const remove = () => removeTag(tag)
+const defaultRender = (tag, remove) => (
+  <li className="tag-box-pill" key={tag.value}>
+    <span className="tag-box-pill-text">
+      {tag.label}
+    </span>
+    <button type="button" className="remove" onClick={remove}>
+      &times;
+    </button>
+  </li>
+)
 
-  return (
-    <li className="tag-box-pill" key={tag.value}>
-      <span className="tag-box-pill-text">
-        {tag.label}
-      </span>
-      <button type="button" className="remove" onClick={remove}>
-        &times;
-      </button>
-    </li>
-  )
+export default function Tag({ tag, removeTag, render = defaultRender }) {
+  return render(tag, () => removeTag(tag))
 }
 
 Tag.propTypes = {

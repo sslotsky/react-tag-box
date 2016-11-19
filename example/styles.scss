@@ -27,6 +27,10 @@ ul.tag-box-pills {
     button {
       padding: 0.25rem 0.75rem;
     }
+
+    &.system {
+      background-color: chocolate;
+    }
   }
 }
 
