@@ -18,7 +18,7 @@ Check out our demo on [gh-pages](https://sslotsky.github.io/react-tag-box/).
 `react-tag-box` manages `Tag` objects in the form of `{ label: String, value: Any }`. Users provide the folliwng properties:
 
 Property Name | Type | Required | Description
----|:---:|:---
+---|:---:|:---:|:---
 tags | `Array<Tag>` | true | The List of all tags
 selected | `Array<Tag>` | true | The list of currently selected tags
 onSelect | `function(tag)` | true | Function to be executed when a tag is selected or submitted
