@@ -54,6 +54,7 @@ export default class TagRejection extends Component {
         onSelect={onSelect}
         removeTag={remove}
         backspaceDelete={true}
+        placeholder="You can reject user defined tags at your discretion"
       />
     )
   }

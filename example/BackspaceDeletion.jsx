@@ -43,6 +43,9 @@ export default class BackspaceDeletion extends Component {
       !selected.map(s => s.value).includes(t.value)
     )
 
+    const placeholder = selected.isEmpty() ? '' :
+      "Use the backspace key to delete the last tag"
+
     return (
       <TagBox
         tags={unselected.toJS()}
@@ -50,6 +53,7 @@ export default class BackspaceDeletion extends Component {
         onSelect={onSelect}
         removeTag={remove}
         backspaceDelete={true}
+        placeholder={placeholder}
       />
     )
   }

@@ -84,6 +84,7 @@ export default class CustomRendering extends Component {
         onSelect={onSelect}
         removeTag={remove}
         renderTag={renderTag}
+        placeholder="You can customize how the tags should render"
       />
     )
   }
