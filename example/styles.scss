@@ -1,3 +1,19 @@
+@import '../node_modules/codemirror/theme/erlang-dark.css';
+@import '../node_modules/codemirror/lib/codemirror.css';
+
+a {
+  cursor: pointer;
+}
+
+.col-1 {
+  margin-right: 1rem;
+}
+
+.CodeMirror {
+  width: 50rem;
+  height: auto;
+}
+
 ul {
   padding-left: 0px;
 }

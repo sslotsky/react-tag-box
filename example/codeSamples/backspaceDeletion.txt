@@ -1,6 +1,6 @@
 import { List } from 'immutable'
 import React, { Component } from 'react'
-import { TagBox, TAG_REJECTED } from '../src'
+import { TagBox } from '../src'
 import './styles.scss'
 
 const sampleTags = List(
@@ -10,7 +10,7 @@ const sampleTags = List(
   }))
 )
 
-export default class TagRejection extends Component {
+export default class BackspaceDeletion extends Component {
   state = {
     tags: sampleTags,
     selected: sampleTags.take(1)
@@ -19,20 +19,16 @@ export default class TagRejection extends Component {
   render() {
     const { tags, selected } = this.state
     const onSelect = tag => {
-      if (tag.label.includes('@')) {
-        return TAG_REJECTED
-      }
-
       const newTag = {
         label: tag.label,
         value: tag.value || tag.label
       }
 
       if (selected.map(t => t.value).includes(newTag.value)) {
-        return null
+        return
       }
 
-      return this.setState({
+      this.setState({
         selected: selected.push(newTag)
       })
     }
@@ -47,6 +43,9 @@ export default class TagRejection extends Component {
       !selected.map(s => s.value).includes(t.value)
     )
 
+    const placeholder = selected.isEmpty() ? '' :
+      "Use the backspace key to delete the last tag"
+
     return (
       <TagBox
         tags={unselected.toJS()}
@@ -54,10 +53,9 @@ export default class TagRejection extends Component {
         onSelect={onSelect}
         removeTag={remove}
         backspaceDelete={true}
-        placeholder="You can reject tags you don't like (try submitting a tag with the @ character)"
+        placeholder={placeholder}
       />
     )
   }
 }
-
 
