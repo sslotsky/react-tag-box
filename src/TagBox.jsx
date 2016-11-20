@@ -4,6 +4,7 @@ import drive from './driver'
 import TAG_REJECTED from './constants'
 import TagProp from './utils'
 import Tag from './Tag'
+import TagManager from './TagManager'
 
 export default class TagBox extends Component {
   static propTypes = {
@@ -63,20 +64,8 @@ export default class TagBox extends Component {
 
   keyHandler() {
     return e => {
-      const { tags, selected, removeTag, backspaceDelete } = this.props
-      const action = drive(e, {
-        tag: this.state.tag,
-        tags,
-        selected,
-        backspaceDelete,
-        remove: removeTag,
-        create: () => this.createTag(),
-        next: () => this.autocomplete.considerNext(),
-        prev: () => this.autocomplete.considerPrevious(),
-        select: (tag) => this.select(tag),
-        clear: () => this.setState({ tag: '', considering: null }),
-        considering: this.state.considering
-      })
+      const tagManager = new TagManager(e, this)
+      const action = drive(e.which, tagManager)
 
       if (action) {
         action()
