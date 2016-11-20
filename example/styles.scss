@@ -7,10 +7,12 @@ a {
 
 .col-1 {
   margin-right: 1rem;
+  &.right {
+    width: 50%;
+  }
 }
 
 .CodeMirror {
-  width: 50rem;
   height: auto;
 }
 

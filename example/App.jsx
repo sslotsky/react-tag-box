@@ -42,7 +42,7 @@ export default class App extends Component {
           </h1>
           <TagRejection />
         </div>
-        <div className="col-1">
+        <div className="col-1 right">
           <h1>Check the code:</h1>
           <Codemirror options={config} value={this.state.sample} />
         </div>
