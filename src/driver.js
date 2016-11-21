@@ -7,74 +7,19 @@ const TAB = 9
 const ESC = 27
 const BKSPC = 8
 
-export default function drive(event, tagManager) {
-  const next = () => {
-    event.preventDefault()
-    tagManager.next()
-  }
-
-  const prev = () => {
-    if (tagManager.considering) {
-      event.preventDefault()
-      tagManager.prev()
-    }
-  }
-
-  const create = () => {
-    event.preventDefault()
-    const { tag, tags, create: createTag, select, considering } = tagManager
-    if (considering) {
-      select(considering)
-    } else {
-      const existingTag = tags.find(t => t.label === tag)
-      if (existingTag) {
-        select(existingTag)
-      } else {
-        createTag()
-      }
-    }
-  }
-
-  const select = () => {
-    const { considering, select: selectTag, tag, create: createTag } = tagManager
-
-    if (tag) {
-      event.preventDefault()
-
-      if (considering) {
-        selectTag(considering)
-      } else {
-        createTag()
-      }
-    }
-  }
-
-  const clear = () => {
-    event.preventDefault()
-    tagManager.clear()
-  }
-
-  const deleteLast = () => {
-    const { selected, tag, backspaceDelete, remove } = tagManager
-
-    if (tag || !backspaceDelete) {
-      return
-    }
-
-    event.preventDefault()
-    remove(selected.reverse()[0])
-  }
+export default function drive(which, tagManager) {
+  const execute = action => () => action.apply(tagManager)
 
   const eventMap = {
-    [ENTER]: create,
-    [RIGHT]: next,
-    [DOWN]: next,
-    [UP]: prev,
-    [LEFT]: prev,
-    [TAB]: select,
-    [ESC]: clear,
-    [BKSPC]: deleteLast
+    [ENTER]: execute(tagManager.create),
+    [RIGHT]: execute(tagManager.next),
+    [DOWN]: execute(tagManager.next),
+    [UP]: execute(tagManager.prev),
+    [LEFT]: execute(tagManager.prev),
+    [TAB]: execute(tagManager.select),
+    [ESC]: execute(tagManager.clear),
+    [BKSPC]: execute(tagManager.deleteLast)
   }
 
-  return eventMap[event.which]
+  return eventMap[which]
 }
