@@ -10,9 +10,13 @@ const sampleTags = List(
   }))
 )
 
-const fetch = input => Promise.resolve(
-  sampleTags.filter(t => t.get('label').includes(input)).toJS()
-)
+const fetch = input => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(sampleTags.filter(t => t.label.includes(input)).toJS())
+    }, 1500)
+  })
+}
 
 export default class Async extends Component {
   state = {
@@ -42,10 +46,6 @@ export default class Async extends Component {
       })
     }
 
-    const unselected = tags.filter(t =>
-      !selected.map(s => s.value).includes(t.value)
-    )
-
     const placeholder = selected.isEmpty() ? '' :
       "Use the backspace key to delete the last tag"
 
@@ -61,6 +61,5 @@ export default class Async extends Component {
     )
   }
 }
-
 
 

@@ -10,7 +10,8 @@ export default class extends Component {
     create: PropTypes.func.isRequired,
     considering: TagProp,
     consider: PropTypes.func.isRequired,
-    renderNewOption: PropTypes.func.isRequired
+    renderNewOption: PropTypes.func.isRequired,
+    loading: PropTypes.bool
   }
 
   componentWillReceiveProps(nextProps) {
@@ -73,7 +74,19 @@ export default class extends Component {
   }
 
   render() {
-    const { input, select, create, considering, consider, renderNewOption } = this.props
+    const { input, select, create, considering, consider, renderNewOption, loading } = this.props
+
+    if (loading) {
+      return (
+        <ul className="autocomplete">
+          <li>
+            <span className="option-text">
+              Loading...
+            </span>
+          </li>
+        </ul>
+      )
+    }
 
     if (!input) {
       return false

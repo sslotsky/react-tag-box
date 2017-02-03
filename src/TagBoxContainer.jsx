@@ -75,6 +75,10 @@ export default class TagBoxContainer extends Component {
     throw new Error('Component must implement the tags() method')
   }
 
+  loading() {
+    return false
+  }
+
   render() {
     const consider = (option) => {
       this.setState({ considering: option })
@@ -103,6 +107,7 @@ export default class TagBoxContainer extends Component {
           {...this.props}
           ref={node => { this.autocomplete = node }}
           input={tag}
+          loading={this.loading()}
           tags={this.tags()}
           select={(t) => this.select(t)}
           create={() => this.createTag()}

@@ -10,9 +10,13 @@ const sampleTags = List(
   }))
 )
 
-const fetch = input => Promise.resolve(
-  sampleTags.filter(t => t.label.includes(input)).toJS()
-)
+const fetch = input => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(sampleTags.filter(t => t.label.includes(input)).toJS())
+    }, 1500)
+  })
+}
 
 export default class Async extends Component {
   state = {
