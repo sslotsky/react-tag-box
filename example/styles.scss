@@ -1,6 +1,10 @@
 @import '../node_modules/codemirror/theme/erlang-dark.css';
 @import '../node_modules/codemirror/lib/codemirror.css';
 
+small button {
+  float: right;
+}
+
 a {
   cursor: pointer;
 }
