@@ -15,7 +15,12 @@ Check out our demo on [gh-pages](https://sslotsky.github.io/react-tag-box/).
 
 ## Usage
 
-`react-tag-box` manages `Tag` objects in the form of `{ label: String, value: Any }`. Users provide the folliwng properties:
+`react-tag-box` manages `Tag` objects in the form of `{ label: String, value: Any }`, and supports both preloaded and asynchronous autocomplete options by providing
+two different components: `TagBox` and `TagBoxAsync`.
+
+### TagBox
+
+Users provide the following props:
 
 Property Name | Type | Required | Description
 ---|:---:|:---:|:---
@@ -28,7 +33,7 @@ renderTag | `function(tag, remove)` | false | Function to override default tag r
 placeholder | `string` | false | Override default placeholder text
 backspaceDelete | `bool` | false | Whether or not the backspace key should delete the last tag. `false` by default 
 
-### Example
+#### Example
 
 ```javascript
 import { List } from 'immutable'
@@ -88,4 +93,90 @@ export default class App extends Component {
     )
   }
 }
+```
+
+### TagBoxAsync
+
+Users provide the following props:
+
+Property Name | Type | Required | Description
+---|:---:|:---:|:---
+fetch | `function(text)` | true | A function that returns a promise which resolves the tags to populate the autocomplete.
+selected | `Array<Tag>` | true | The list of currently selected tags
+onSelect | `function(tag)` | true | Function to be executed when a tag is selected or submitted
+removeTag | `function(tag)` | true | Function called when the `remove` button is clicked on a tag
+renderNewOption | `function(text)` | false | Function for overriding the default `Add ${input}` prompt 
+renderTag | `function(tag, remove)` | false | Function to override default tag rendering
+placeholder | `string` | false | Override default placeholder text
+backspaceDelete | `bool` | false | Whether or not the backspace key should delete the last tag. `false` by default 
+
+#### Example
+
+```javascript
+import { List } from 'immutable'
+import React, { Component } from 'react'
+import { TagBoxAsync } from 'react-tag-box'
+import './styles.scss'
+
+// Mock server data. This would normally be in your database.
+const sampleTags = List(
+  ['foo', 'bar', 'baz', 'blitz', 'quux', 'barf', 'balderdash'].map(t => ({
+    label: t,
+    value: t
+  }))
+)
+
+// Mock http request. This would normally make a request to your server to fetch matching tags.
+const fetch = input => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(sampleTags.filter(t => t.label.includes(input)).toJS())
+    }, 1500)
+  })
+}
+
+export default class Async extends Component {
+  state = {
+    selected: sampleTags.take(1)
+  }
+
+  render() {
+    const { selected } = this.state
+    const onSelect = tag => {
+      const newTag = {
+        label: tag.label,
+        value: tag.value || tag.label
+      }
+
+      if (selected.map(t => t.value).includes(newTag.value)) {
+        return
+      }
+
+      this.setState({
+        selected: selected.push(newTag)
+      })
+    }
+
+    const remove = tag => {
+      this.setState({
+        selected: selected.filter(t => t.value !== tag.value)
+      })
+    }
+
+    const placeholder = selected.isEmpty() ? '' :
+      "Use the backspace key to delete the last tag"
+
+    return (
+      <TagBoxAsync
+        fetch={fetch}
+        selected={selected.toJS()}
+        onSelect={onSelect}
+        removeTag={remove}
+        backspaceDelete={true}
+        placeholder={placeholder}
+      />
+    )
+  }
+}
+
 ```
