@@ -32,21 +32,24 @@ export default class App extends Component {
       <div className="row">
         <div className="col-1">
           <h1>Backspace Deletion</h1>
-          <BackspaceDeletion />
           <div>
             <small><button onClick={seeCode(backspaceDeletion)}>See Code</button></small>
           </div>
-          <h1>Custom Rendering -
-            <small><a onClick={seeCode(customRendering)}> See Code</a></small>
-          </h1>
+          <BackspaceDeletion />
+          <h1>Custom Rendering </h1>
+          <div>
+            <small><button onClick={seeCode(customRendering)}>See Code</button></small>
+          </div>
           <CustomRendering />
-          <h1>Tag Rejection -
-            <small><a onClick={seeCode(tagRejection)}> See Code</a></small>
-          </h1>
+          <h1>Tag Rejection</h1>
+          <div>
+            <small><button onClick={seeCode(tagRejection)}>See Code</button></small>
+          </div>
           <TagRejection />
-          <h1>Async Loading -
-            <small><a onClick={seeCode(asyncLoading)}> See Code</a></small>
-          </h1>
+          <h1>Async Loading</h1>
+          <div>
+            <small><button onClick={seeCode(asyncLoading)}>See Code</button></small>
+          </div>
           <Async />
         </div>
         <div className="col-1 right">
