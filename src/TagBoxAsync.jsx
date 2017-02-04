@@ -29,6 +29,14 @@ export default class TagBoxAsync extends TagContainer {
     return this.state.loading
   }
 
+  createTag() {
+    const { tag } = this.state
+    if (tag) {
+      this.select({ label: tag })
+      this.cache.clear()
+    }
+  }
+
   tagUpdater() {
     return e => {
       const input = e.target.value

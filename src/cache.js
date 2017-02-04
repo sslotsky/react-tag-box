@@ -1,5 +1,5 @@
 export default function cache() {
-  const map = {}
+  let map = {}
 
   const get = query => map[query]
 
@@ -8,5 +8,9 @@ export default function cache() {
     return tags
   }
 
-  return { get, add }
+  const clear = input => {
+    map = {}
+  }
+
+  return { get, add, clear }
 }
