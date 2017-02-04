@@ -23,8 +23,7 @@
   "author": "Sam Slotsky",
   "license": "MIT",
   "dependencies": {
-    "classnames": "^2.2.5",
-    "debounce-promise": "^3.0.1"
+    "classnames": "^2.2.5"
   },
   "peerDependencies": {
     "react": "^0.14.8 || ^15.1.0"

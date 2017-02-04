@@ -8,7 +8,7 @@ export default function cache() {
     return tags
   }
 
-  const clear = input => {
+  const clear = () => {
     map = {}
   }
 

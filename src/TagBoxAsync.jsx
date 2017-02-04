@@ -1,5 +1,4 @@
 import { PropTypes } from 'react'
-import debounce from 'debounce-promise'
 import makeCache from './cache'
 import TagContainer from './TagBoxContainer'
 
@@ -16,10 +15,6 @@ export default class TagBoxAsync extends TagContainer {
   }
 
   cache = makeCache()
-
-  loader() {
-    return debounce(this.props.fetch, 500)
-  }
 
   tags() {
     return this.state.tags
@@ -48,8 +43,7 @@ export default class TagBoxAsync extends TagContainer {
       }
 
       this.setState({ loading: true })
-      const fetch = this.loader()
-      return fetch(input).then(tags => {
+      return this.props.fetch(input).then(tags => {
         this.setState({
           tags: this.cache.add(input, tags),
           loading: false
