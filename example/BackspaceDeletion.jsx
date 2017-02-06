@@ -24,10 +24,6 @@ export default class BackspaceDeletion extends Component {
         value: tag.value || tag.label
       }
 
-      if (selected.map(t => t.value).includes(newTag.value)) {
-        return
-      }
-
       this.setState({
         selected: selected.push(newTag)
       })
@@ -39,16 +35,12 @@ export default class BackspaceDeletion extends Component {
       })
     }
 
-    const unselected = tags.filter(t =>
-      !selected.map(s => s.value).includes(t.value)
-    )
-
     const placeholder = selected.isEmpty() ? '' :
       "Use the backspace key to delete the last tag"
 
     return (
       <TagBox
-        tags={unselected.toJS()}
+        tags={tags.toJS()}
         selected={selected.toJS()}
         onSelect={onSelect}
         removeTag={remove}

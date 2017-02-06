@@ -33,7 +33,8 @@ export default class TagBoxContainer extends Component {
   }
 
   select(tag) {
-    if (!tag) {
+    const { selected } = this.props
+    if (!tag || selected.map(t => t.label).includes(tag.label)) {
       return
     }
 

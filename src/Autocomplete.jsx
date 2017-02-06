@@ -45,7 +45,7 @@ export default class extends Component {
   matchingOptions() {
     const { tags, input, selected } = this.props
     const matches = tags.filter(t =>
-      t.label.includes(input) && !selected.includes(t)
+      t.label.includes(input) && !selected.map(s => s.value).includes(t.value)
     )
     const values = matches.map(t => t.value)
 
@@ -85,7 +85,8 @@ export default class extends Component {
   }
 
   render() {
-    const { input, select, create, considering, consider, renderNewOption, loading } = this.props
+    const { input, select, create, considering, consider, renderNewOption, loading, selected } =
+      this.props
 
     if (loading) {
       return (
@@ -105,6 +106,8 @@ export default class extends Component {
 
     const { matches } = this.matchingOptions()
     const exactMatch = matches.find(t => t.label === input)
+    const alreadySelected = selected.map(t => t.label).includes(input)
+
     const addNewOption = !exactMatch && (
       <li
         className={classNames('add-new', { considering: !considering })}
@@ -116,6 +119,16 @@ export default class extends Component {
         </span>
       </li>
     )
+
+    const selectedNotice = alreadySelected && (
+      <li>
+        <span className="option-text">
+          Already Selected
+        </span>
+      </li>
+    )
+
+    const content = alreadySelected ? selectedNotice : addNewOption
 
     const matching = matches.map(t => {
       const className = classNames({
@@ -138,7 +151,7 @@ export default class extends Component {
 
     return (
       <ul className="autocomplete">
-        {addNewOption}
+        {content}
         {matching}
       </ul>
     )
