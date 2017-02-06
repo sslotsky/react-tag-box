@@ -21,7 +21,8 @@ export default class extends Component {
       consider(null)
     }
 
-    if (!input || input === this.props.input) {
+    const noChange = (input === this.props.input) && (tags === this.props.tags)
+    if (!input || noChange) {
       return
     }
 
