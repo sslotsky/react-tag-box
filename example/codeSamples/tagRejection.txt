@@ -28,10 +28,6 @@ export default class TagRejection extends Component {
         value: tag.value || tag.label
       }
 
-      if (selected.map(t => t.value).includes(newTag.value)) {
-        return null
-      }
-
       return this.setState({
         selected: selected.push(newTag)
       })
@@ -43,13 +39,9 @@ export default class TagRejection extends Component {
       })
     }
 
-    const unselected = tags.filter(t =>
-      !selected.map(s => s.value).includes(t.value)
-    )
-
     return (
       <TagBox
-        tags={unselected.toJS()}
+        tags={tags.toJS()}
         selected={selected.toJS()}
         onSelect={onSelect}
         removeTag={remove}

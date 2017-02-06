@@ -16,22 +16,26 @@ Check out our demo on [gh-pages](https://sslotsky.github.io/react-tag-box/).
 ## Usage
 
 `react-tag-box` manages `Tag` objects in the form of `{ label: String, value: Any }`, and supports both preloaded and asynchronous autocomplete options by providing
-two different components: `TagBox` and `TagBoxAsync`.
-
-### TagBox
-
-Users provide the following props:
+two different components: `TagBox` and `TagBoxAsync`. Both components accept the following common properties:
 
 Property Name | Type | Required | Description
 ---|:---:|:---:|:---
-tags | `Array<Tag>` | true | The List of all tags
 selected | `Array<Tag>` | true | The list of currently selected tags
 onSelect | `function(tag)` | true | Function to be executed when a tag is selected or submitted
 removeTag | `function(tag)` | true | Function called when the `remove` button is clicked on a tag
 renderNewOption | `function(text)` | false | Function for overriding the default `Add ${input}` prompt 
+selectedText | `string` | false | Text to display when the search input is already a selected tag. `'Already Selected'` by default.
 renderTag | `function(tag, remove)` | false | Function to override default tag rendering
 placeholder | `string` | false | Override default placeholder text
 backspaceDelete | `bool` | false | Whether or not the backspace key should delete the last tag. `false` by default 
+
+### TagBox
+
+Users provide the following props in addition to the common props:
+
+Property Name | Type | Required | Description
+---|:---:|:---:|:---
+tags | `Array<Tag>` | true | The List of all tags
 
 #### Example
 
@@ -62,10 +66,6 @@ export default class App extends Component {
         value: tag.value || tag.label
       }
 
-      if (selected.map(t => t.value).includes(newTag.value)) {
-        return
-      }
-
       this.setState({
         selected: selected.push(newTag)
       })
@@ -77,15 +77,11 @@ export default class App extends Component {
       })
     }
 
-    const unselected = tags.filter(t =>
-      !selected.map(s => s.value).includes(t.value)
-    )
-
     return (
       <div style={{ width: '50%' }}>
         <TagBox
           tags={unselected.toJS()}
-          selected={selected.toJS()}
+          selected={tags.toJS()}
           onSelect={onSelect}
           removeTag={remove}
         />
@@ -97,18 +93,12 @@ export default class App extends Component {
 
 ### TagBoxAsync
 
-Users provide the following props:
+Users provide the following props in addition to the common props:
 
 Property Name | Type | Required | Description
 ---|:---:|:---:|:---
 fetch | `function(text)` | true | A function that returns a promise which resolves the tags to populate the autocomplete.
-selected | `Array<Tag>` | true | The list of currently selected tags
-onSelect | `function(tag)` | true | Function to be executed when a tag is selected or submitted
-removeTag | `function(tag)` | true | Function called when the `remove` button is clicked on a tag
-renderNewOption | `function(text)` | false | Function for overriding the default `Add ${input}` prompt 
-renderTag | `function(tag, remove)` | false | Function to override default tag rendering
-placeholder | `string` | false | Override default placeholder text
-backspaceDelete | `bool` | false | Whether or not the backspace key should delete the last tag. `false` by default 
+loadingText | `string` | false | Text to display when results are being fetched. `'Loading...'` by default.
 
 #### Example
 
@@ -148,10 +138,6 @@ export default class Async extends Component {
         value: tag.value || tag.label
       }
 
-      if (selected.map(t => t.value).includes(newTag.value)) {
-        return
-      }
-
       this.setState({
         selected: selected.push(newTag)
       })
@@ -178,5 +164,4 @@ export default class Async extends Component {
     )
   }
 }
-
 ```

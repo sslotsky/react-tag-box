@@ -35,10 +35,6 @@ export default class CustomRendering extends Component {
         value: tag.value || tag.label
       }
 
-      if (selected.map(t => t.value).includes(newTag.value)) {
-        return
-      }
-
       this.setState({
         selected: selected.push(newTag)
       })
@@ -49,10 +45,6 @@ export default class CustomRendering extends Component {
         selected: selected.filter(t => t.value !== tag.value)
       })
     }
-
-    const unselected = tags.filter(t =>
-      !selected.map(s => s.value).includes(t.value)
-    )
 
     const renderTag = (tag, remove) => {
       const css = classNames('tag-box-pill', { system: tag.system })
@@ -79,7 +71,7 @@ export default class CustomRendering extends Component {
 
     return (
       <TagBox
-        tags={unselected.toJS()}
+        tags={tags.toJS()}
         selected={selected.toJS()}
         onSelect={onSelect}
         removeTag={remove}

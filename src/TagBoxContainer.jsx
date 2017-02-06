@@ -13,11 +13,15 @@ export default class TagBoxContainer extends Component {
     renderNewOption: PropTypes.func,
     removeTag: PropTypes.func.isRequired,
     renderTag: PropTypes.func,
+    loadingText: PropTypes.string,
+    selectedText: PropTypes.string,
     placeholder: PropTypes.string
   }
 
   static defaultProps = {
     renderNewOption: input => `Add ${input}...`,
+    loadingText: 'Loading...',
+    selectedText: 'Already Selected',
     placeHolder: ''
   }
 

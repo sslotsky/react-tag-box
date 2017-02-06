@@ -12,6 +12,8 @@ export default class extends Component {
     considering: TagProp,
     consider: PropTypes.func.isRequired,
     renderNewOption: PropTypes.func.isRequired,
+    loadingText: PropTypes.string,
+    selectedText: PropTypes.string,
     loading: PropTypes.bool
   }
 
@@ -85,7 +87,18 @@ export default class extends Component {
   }
 
   render() {
-    const { input, select, create, considering, consider, renderNewOption, loading, selected } =
+    const {
+      input,
+      select,
+      create,
+      considering,
+      consider,
+      renderNewOption,
+      loadingText,
+      selectedText,
+      loading,
+      selected
+    } =
       this.props
 
     if (loading) {
@@ -93,7 +106,7 @@ export default class extends Component {
         <ul className="autocomplete">
           <li>
             <span className="option-text">
-              Loading...
+              {loadingText}
             </span>
           </li>
         </ul>
@@ -123,7 +136,7 @@ export default class extends Component {
     const selectedNotice = alreadySelected && (
       <li>
         <span className="option-text">
-          Already Selected
+          {selectedText}
         </span>
       </li>
     )
