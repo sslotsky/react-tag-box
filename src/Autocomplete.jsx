@@ -5,6 +5,7 @@ import TagProp from './utils'
 export default class extends Component {
   static propTypes = {
     input: PropTypes.string,
+    selected: PropTypes.arrayOf(TagProp),
     tags: PropTypes.arrayOf(TagProp).isRequired,
     select: PropTypes.func.isRequired,
     create: PropTypes.func.isRequired,
@@ -14,8 +15,12 @@ export default class extends Component {
     loading: PropTypes.bool
   }
 
+  static defaultProps = {
+    selected: []
+  }
+
   componentWillReceiveProps(nextProps) {
-    const { tags, input, consider } = nextProps
+    const { tags, input, consider, selected } = nextProps
 
     if (this.props.input && !input) {
       consider(null)
@@ -26,7 +31,10 @@ export default class extends Component {
       return
     }
 
-    const matches = tags.filter(t => t.label.includes(input))
+    const matches = tags.filter(t =>
+      t.label.includes(input) && !selected.includes(t)
+    )
+
     if (matches.length) {
       consider(matches[0])
     } else {
@@ -35,8 +43,10 @@ export default class extends Component {
   }
 
   matchingOptions() {
-    const { tags, input } = this.props
-    const matches = tags.filter(t => t.label.includes(input))
+    const { tags, input, selected } = this.props
+    const matches = tags.filter(t =>
+      t.label.includes(input) && !selected.includes(t)
+    )
     const values = matches.map(t => t.value)
 
     return { matches, values }

@@ -131,6 +131,7 @@ describe('<Autocomplete />', () => {
       const props = {
         consider: createSpy(),
         renderNewOption: createSpy(),
+        selected: [],
         tags: [tag]
       }
 
