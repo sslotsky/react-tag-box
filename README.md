@@ -28,6 +28,7 @@ selectedText | `string` | false | Text to display when the search input is alrea
 renderTag | `function(tag, remove)` | false | Function to override default tag rendering
 placeholder | `string` | false | Override default placeholder text
 backspaceDelete | `bool` | false | Whether or not the backspace key should delete the last tag. `false` by default 
+search | `function(tag, input, selectedTags)` | false | Function to determine if a given tag should be included in the autocomplete suggestions for a given input.
 
 ### TagBox
 
@@ -75,6 +76,10 @@ export default class App extends Component {
       this.setState({
         selected: selected.filter(t => t.value !== tag.value)
       })
+    }
+    
+    const search = (tag, input, selectedTags) => {
+      tag.label.toLowerCase().includes(input.toLowerCase()) && !selected.includes(tag)
     }
 
     return (
