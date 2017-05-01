@@ -20,7 +20,8 @@ describe('<Autocomplete />', () => {
         consider: createSpy(),
         considering: beer,
         tags: [beer, beerNuts],
-        renderNewOption: createSpy()
+        renderNewOption: createSpy(),
+        search: () => [beer, beerNuts]
       }
 
       const wrapper = shallow(
@@ -40,7 +41,8 @@ describe('<Autocomplete />', () => {
         input: 'be',
         consider: createSpy(),
         tags: [tag],
-        renderNewOption: createSpy()
+        renderNewOption: createSpy(),
+        search: () => [tag]
       }
 
       const wrapper = shallow(
@@ -63,7 +65,8 @@ describe('<Autocomplete />', () => {
         consider: createSpy(),
         considering: tag,
         tags: [tag],
-        renderNewOption: createSpy()
+        renderNewOption: createSpy(),
+        search: () => [tag]
       }
 
       const wrapper = shallow(
@@ -91,7 +94,8 @@ describe('<Autocomplete />', () => {
         consider: createSpy(),
         considering: beerNuts,
         tags: [beer, beerNuts],
-        renderNewOption: createSpy()
+        renderNewOption: createSpy(),
+        search: () => [beer, beerNuts]
       }
 
       const wrapper = shallow(
@@ -112,7 +116,8 @@ describe('<Autocomplete />', () => {
         input: 'b',
         consider: createSpy(),
         renderNewOption: createSpy(),
-        tags: []
+        tags: [],
+        search: createSpy()
       }
 
       const wrapper = shallow(
@@ -132,8 +137,14 @@ describe('<Autocomplete />', () => {
         consider: createSpy(),
         renderNewOption: createSpy(),
         selected: [],
-        tags: [tag]
+        tags: [tag],
+        search: () => [tag]
       }
+      const searchSpy = expect.spyOn(props, 'search').andCallThrough()
+
+      beforeEach(() => {
+        searchSpy.restore()
+      })
 
       const wrapper = shallow(
         <Autocomplete {...props} />
@@ -144,6 +155,10 @@ describe('<Autocomplete />', () => {
       it('considers the first suggestion', () => {
         expect(props.consider).toHaveBeenCalledWith(tag)
       })
+
+      it('searches for suggestions', () => {
+        expect(searchSpy).toHaveBeenCalledWith(tag, 'be')
+      })
     })
 
     context('when there are no suggestions', () => {
@@ -151,7 +166,8 @@ describe('<Autocomplete />', () => {
       const props = {
         consider: createSpy(),
         renderNewOption: createSpy(),
-        tags: [tag]
+        tags: [tag],
+        search: createSpy()
       }
 
       const wrapper = shallow(

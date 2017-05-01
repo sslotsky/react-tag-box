@@ -14,7 +14,8 @@ export default class extends Component {
     renderNewOption: PropTypes.func.isRequired,
     loadingText: PropTypes.string,
     selectedText: PropTypes.string,
-    loading: PropTypes.bool
+    loading: PropTypes.bool,
+    search: PropTypes.func.isRequired
   }
 
   static defaultProps = {
@@ -34,7 +35,7 @@ export default class extends Component {
     }
 
     const matches = tags.filter(t =>
-      t.label.includes(input) && !selected.includes(t)
+      this.props.search(t, input) && !selected.includes(t)
     )
 
     if (matches.length) {
@@ -45,9 +46,9 @@ export default class extends Component {
   }
 
   matchingOptions() {
-    const { tags, input, selected } = this.props
+    const { tags, input, selected, search } = this.props
     const matches = tags.filter(t =>
-      t.label.includes(input) && !selected.map(s => s.value).includes(t.value)
+      search(t, input) && !selected.map(s => s.value).includes(t.value)
     )
     const values = matches.map(t => t.value)
 
