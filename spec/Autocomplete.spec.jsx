@@ -157,7 +157,7 @@ describe('<Autocomplete />', () => {
       })
 
       it('searches for suggestions', () => {
-        expect(searchSpy).toHaveBeenCalledWith(tag, 'be', [])
+        expect(searchSpy).toHaveBeenCalledWith(tag, 'be')
       })
     })
 

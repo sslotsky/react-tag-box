@@ -24,7 +24,7 @@ export default class TagBoxContainer extends Component {
     loadingText: 'Loading...',
     selectedText: 'Already Selected',
     placeHolder: '',
-    search: (tag, input, selected) => tag.label.includes(input) && !selected.includes(tag)
+    search: (tag, input) => tag.label.includes(input)
   }
 
   state = {
@@ -118,7 +118,7 @@ export default class TagBoxContainer extends Component {
           tags={this.tags()}
           select={(t) => this.select(t)}
           create={() => this.createTag()}
-          search={(t, input, selectedTags) => search(t, input, selectedTags)}
+          search={(t, input) => search(t, input)}
           considering={considering}
           consider={consider}
         />

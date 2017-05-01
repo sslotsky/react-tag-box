@@ -35,7 +35,7 @@ export default class extends Component {
     }
 
     const matches = tags.filter(t =>
-      this.props.search(t, input, selected)
+      this.props.search(t, input) && !selected.includes(t)
     )
 
     if (matches.length) {
@@ -48,7 +48,7 @@ export default class extends Component {
   matchingOptions() {
     const { tags, input, selected, search } = this.props
     const matches = tags.filter(t =>
-      search(t, input, selected)
+      search(t, input) && !selected.map(s => s.value).includes(t.value)
     )
     const values = matches.map(t => t.value)
 
