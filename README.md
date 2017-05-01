@@ -89,6 +89,7 @@ export default class App extends Component {
           selected={tags.toJS()}
           onSelect={onSelect}
           removeTag={remove}
+          search={search}
         />
       </div>
     )
