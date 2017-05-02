@@ -15,7 +15,8 @@ export default class extends Component {
     loadingText: PropTypes.string,
     selectedText: PropTypes.string,
     loading: PropTypes.bool,
-    search: PropTypes.func.isRequired
+    search: PropTypes.func.isRequired,
+    exactMatch: PropTypes.func.isRequired
   }
 
   static defaultProps = {
@@ -98,7 +99,8 @@ export default class extends Component {
       loadingText,
       selectedText,
       loading,
-      selected
+      selected,
+      exactMatch
     } =
       this.props
 
@@ -119,10 +121,10 @@ export default class extends Component {
     }
 
     const { matches } = this.matchingOptions()
-    const exactMatch = matches.find(t => t.label === input)
-    const alreadySelected = selected.map(t => t.label).includes(input)
+    const foundExactMatch = matches.find(t => exactMatch(t, input))
+    const alreadySelected = selected.find(t => exactMatch(t, input))
 
-    const addNewOption = !exactMatch && (
+    const addNewOption = !foundExactMatch && (
       <li
         className={classNames('add-new', { considering: !considering })}
         onClick={create}

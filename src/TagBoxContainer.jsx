@@ -16,7 +16,8 @@ export default class TagBoxContainer extends Component {
     loadingText: PropTypes.string,
     selectedText: PropTypes.string,
     placeholder: PropTypes.string,
-    search: PropTypes.func
+    search: PropTypes.func,
+    exactMatch: PropTypes.func
   }
 
   static defaultProps = {
@@ -24,7 +25,8 @@ export default class TagBoxContainer extends Component {
     loadingText: 'Loading...',
     selectedText: 'Already Selected',
     placeHolder: '',
-    search: (tag, input) => tag.label.includes(input)
+    search: (tag, input) => tag.label.includes(input),
+    exactMatch: (tag, input) => tag.label === input
   }
 
   state = {
@@ -92,7 +94,7 @@ export default class TagBoxContainer extends Component {
     }
 
     const { tag, considering } = this.state
-    const { selected, removeTag, placeholder, renderTag, search } = this.props
+    const { selected, removeTag, placeholder, renderTag, search, exactMatch } = this.props
     const pills = selected.map(t => (
       <Tag tag={t} key={t.value} removeTag={removeTag} render={renderTag} />
     ))
@@ -119,6 +121,7 @@ export default class TagBoxContainer extends Component {
           select={(t) => this.select(t)}
           create={() => this.createTag()}
           search={(t, input) => search(t, input)}
+          exactMatch={(t, input) => exactMatch(t, input)}
           considering={considering}
           consider={consider}
         />
