@@ -5,6 +5,40 @@ import expect, { createSpy } from 'expect'
 import Autocomplete from '../src/Autocomplete'
 
 describe('<Autocomplete />', () => {
+  describe('.render()', () => {
+    const [beer, beerNuts] = [{
+      label: 'beer',
+      value: 'beer'
+    }, {
+      label: 'beer nuts',
+      value: 'beer nuts'
+    }]
+
+    const props = {
+      input: 'be',
+      consider: createSpy(),
+      considering: beer,
+      tags: [beer, beerNuts],
+      renderNewOption: createSpy(),
+      search: () => [beer, beerNuts],
+      exactMatch: (input, tag) => tag.label === input
+    }
+
+    const exactMatchSpy = expect.spyOn(props, 'exactMatch').andCallThrough()
+
+    beforeEach(() => {
+      exactMatchSpy.restore()
+    })
+
+    shallow(
+      <Autocomplete {...props} />
+    )
+
+    it('determines if the input exactly matches a tag', () => {
+      expect(exactMatchSpy.called)
+    })
+  })
+
   describe('.considerNext()', () => {
     context('when considering a suggestion', () => {
       const [beer, beerNuts] = [{
@@ -21,7 +55,8 @@ describe('<Autocomplete />', () => {
         considering: beer,
         tags: [beer, beerNuts],
         renderNewOption: createSpy(),
-        search: () => [beer, beerNuts]
+        search: () => [beer, beerNuts],
+        exactMatch: createSpy()
       }
 
       const wrapper = shallow(
@@ -42,7 +77,8 @@ describe('<Autocomplete />', () => {
         consider: createSpy(),
         tags: [tag],
         renderNewOption: createSpy(),
-        search: () => [tag]
+        search: () => [tag],
+        exactMatch: createSpy()
       }
 
       const wrapper = shallow(
@@ -66,7 +102,8 @@ describe('<Autocomplete />', () => {
         considering: tag,
         tags: [tag],
         renderNewOption: createSpy(),
-        search: () => [tag]
+        search: () => [tag],
+        exactMatch: createSpy()
       }
 
       const wrapper = shallow(
@@ -95,7 +132,8 @@ describe('<Autocomplete />', () => {
         considering: beerNuts,
         tags: [beer, beerNuts],
         renderNewOption: createSpy(),
-        search: () => [beer, beerNuts]
+        search: () => [beer, beerNuts],
+        exactMatch: createSpy()
       }
 
       const wrapper = shallow(
@@ -117,7 +155,8 @@ describe('<Autocomplete />', () => {
         consider: createSpy(),
         renderNewOption: createSpy(),
         tags: [],
-        search: createSpy()
+        search: createSpy(),
+        exactMatch: createSpy()
       }
 
       const wrapper = shallow(
@@ -138,7 +177,8 @@ describe('<Autocomplete />', () => {
         renderNewOption: createSpy(),
         selected: [],
         tags: [tag],
-        search: () => [tag]
+        search: () => [tag],
+        exactMatch: createSpy()
       }
       const searchSpy = expect.spyOn(props, 'search').andCallThrough()
 
@@ -167,7 +207,8 @@ describe('<Autocomplete />', () => {
         consider: createSpy(),
         renderNewOption: createSpy(),
         tags: [tag],
-        search: createSpy()
+        search: createSpy(),
+        exactMatch: createSpy()
       }
 
       const wrapper = shallow(

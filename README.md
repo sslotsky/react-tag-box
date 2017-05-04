@@ -29,6 +29,7 @@ renderTag | `function(tag, remove)` | false | Function to override default tag r
 placeholder | `string` | false | Override default placeholder text
 backspaceDelete | `bool` | false | Whether or not the backspace key should delete the last tag. `false` by default 
 search | `function(tag, input)` | false | Function to determine if a given tag should be included in the autocomplete suggestions for a given input.
+exactMatch | `function(tag, input)` | false | Function to determine if the tag matches the input. 
 
 ### TagBox
 
@@ -78,8 +79,18 @@ export default class App extends Component {
       })
     }
     
+    // optional
+    // default behavior is case-sensitive search within tag label, like so: 
+    // (tag, input) => tag.label.includes(input)
     const search = (tag, input) => {
       tag.label.toLowerCase().includes(input.toLowerCase())
+    }
+    
+    // optional
+    // default behavior is case-sensitive match against tag label, like so: 
+    // (tag, input) => tag.label === input
+    const exactMatch = (tag, input) => {
+      tag.label.toLowerCase() === input.toLowerCase();
     }
 
     return (
@@ -90,6 +101,7 @@ export default class App extends Component {
           onSelect={onSelect}
           removeTag={remove}
           search={search}
+          exactMatch={exactMatch}
         />
       </div>
     )
