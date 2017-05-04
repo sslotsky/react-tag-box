@@ -79,10 +79,16 @@ export default class App extends Component {
       })
     }
     
+    // optional
+    // default behavior is case-sensitive search within tag label, like so: 
+    // (tag, input) => tag.label.includes(input)
     const search = (tag, input) => {
       tag.label.toLowerCase().includes(input.toLowerCase())
     }
     
+    // optional
+    // default behavior is case-sensitive match against tag label, like so: 
+    // (tag, input) => tag.label === input
     const exactMatch = (tag, input) => {
       tag.label.toLowerCase() === input.toLowerCase();
     }
