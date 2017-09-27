@@ -1,4 +1,5 @@
-import React, { PropTypes, Component } from 'react'
+import React, { Component } from 'react'
+import PropTypes from "prop-types"
 import TagProp from './utils'
 import TAG_REJECTED from './constants'
 import TagManager from './TagManager'
